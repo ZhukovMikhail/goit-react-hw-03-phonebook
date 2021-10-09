@@ -16,6 +16,23 @@ class App extends Component {
     ],
     filter: '',
   };
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    console.log(parsedContacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState);
+    console.log(this.state);
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+  componentWillUnmount() {}
+
   hendleOnchange = e => {
     const { name, value } = e.currentTarget;
 
