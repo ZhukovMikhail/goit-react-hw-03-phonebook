@@ -1,0 +1,44 @@
+.items {
+  display: flex;
+  cursor: pointer;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  list-style: none;
+  border: 2px solid blanchedalmond;
+  color: blanchedalmond;
+  margin: 5px;
+}
+.itemBtn {
+  /* display: flex; */
+  border-radius: 5px;
+  color: blanchedalmond;
+  border: 2px solid blanchedalmond;
+  background-color: rgb(115, 112, 146);
+  width: 100px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.items:hover {
+  box-shadow: 0px 4px 10px 8px rgba(204, 193, 193, 0.75);
+  -webkit-box-shadow: 0px 4px 10px 8px rgba(204, 193, 193, 0.75);
+  -moz-box-shadow: 0px 4px 10px 8px rgba(204, 193, 193, 0.75);
+}
+.itemBtn:hover {
+  box-shadow: 0px 0px 8px 5px rgba(204, 193, 193, 0.75);
+  -webkit-box-shadow: 0px 0px 8px 5px rgba(204, 193, 193, 0.75);
+  -moz-box-shadow: 0px 0px 8px 5px rgba(204, 193, 193, 0.75);
+}
+.contItemsWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-right: 10px;
+}
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  fill: blanchedalmond;
+  margin-right: 5px;
+}
