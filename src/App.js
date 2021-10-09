@@ -5,6 +5,7 @@ import ContactList from './Components/Contacts/Contacts.jsx';
 import Filter from './Components/Filter/Filter.jsx';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './App.module.css';
+import Modal from './Components/Modal/Modal.jsx';
 
 class App extends Component {
   state = {
@@ -15,13 +16,16 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
+    showModal: false,
   };
+
   componentDidMount() {
     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
     console.log(parsedContacts);
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
+    window.addEventListener('keydown', this.idEscapeEvent);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -32,6 +36,12 @@ class App extends Component {
     }
   }
   componentWillUnmount() {}
+
+  toggleModal = () => {
+    this.setState(state => ({
+      showModal: !state.showModal,
+    }));
+  };
 
   hendleOnchange = e => {
     const { name, value } = e.currentTarget;
@@ -49,6 +59,7 @@ class App extends Component {
         { name: name, id: uuidv4(), number: number },
       ],
     }));
+    this.toggleModal();
   };
   deleteHandler = e => {
     console.dir(e.currentTarget.parentElement.id);
@@ -61,24 +72,45 @@ class App extends Component {
   render() {
     return (
       <div className={styles.section}>
-        <>
-          <div className={styles.phonebook}>
-            <h2 className={styles.title}>Phonebook</h2>
-            <ContactForm onSubmitForm={this.onSubmitForm} />
+        <div className={styles.phonebook}>
+          <div>
+            <h2 className={styles.titleMain}>Phonebook</h2>
+            <button
+              type="button"
+              className={styles.addBtn}
+              onClick={this.toggleModal}
+            >
+              Add Contact
+            </button>
           </div>
-          <h2 className={styles.title}>Contacts</h2>
-          <Filter
-            filterValue={this.state.filter}
-            onFilterChange={this.hendleOnchange}
-          />
-          <ul className={styles.itemList}>
-            <ContactList
-              contItems={this.state.contacts}
-              filteredValue={this.state.filter}
-              deleteHandler={this.deleteHandler}
+          {/* <ContactForm onSubmitForm={this.onSubmitForm} /> */}
+          <div>
+            <Filter
+              filterValue={this.state.filter}
+              onFilterChange={this.hendleOnchange}
             />
-          </ul>
-        </>
+            <h2 className={styles.title}>Contacts</h2>
+            <ul className={styles.itemList}>
+              <ContactList
+                contItems={this.state.contacts}
+                filteredValue={this.state.filter}
+                deleteHandler={this.deleteHandler}
+              />
+            </ul>
+          </div>
+        </div>
+        {this.state.showModal && (
+          <Modal onCloseModal={this.toggleModal}>
+            <ContactForm onSubmitForm={this.onSubmitForm} />
+            <button
+              type="button"
+              className={styles.btn}
+              onClick={this.toggleModal}
+            >
+              X
+            </button>
+          </Modal>
+        )}
       </div>
     );
   }

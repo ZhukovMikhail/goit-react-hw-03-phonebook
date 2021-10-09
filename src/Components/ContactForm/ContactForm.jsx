@@ -50,7 +50,11 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <button className={styles.itemBtn} type="submit">
+        <button
+          className={styles.itemBtn}
+          type="submit"
+          onClick={this.props.onToggleModal}
+        >
           Add Contact
         </button>
       </form>
