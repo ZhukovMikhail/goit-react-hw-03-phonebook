@@ -20,6 +20,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log('это componentDidMount');
     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
     console.log(parsedContacts);
     if (parsedContacts) {
@@ -29,6 +30,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('это componentDidUpdate');
     console.log(prevState);
     console.log(this.state);
     if (prevState.contacts !== this.state.contacts) {
@@ -70,6 +72,7 @@ class App extends Component {
     });
   };
   render() {
+    console.log('это render');
     return (
       <div className={styles.section}>
         <div className={styles.phonebook}>
