@@ -1,11 +1,11 @@
-import React from 'react';
+// import React from 'react';
 import styles from './Contacts.module.css';
 import PropTypes from 'prop-types';
 // import iconSvg from './sprite.svg';
 
 const ContactList = ({ contItems, filteredValue, deleteHandler }) => {
   const filteredItems = contItems.filter(contItem =>
-    contItem.name.toLowerCase().includes(filteredValue.toLowerCase()),
+    contItem.name.toLowerCase().includes(filteredValue.toLowerCase().trim()),
   );
   const renderItems = filteredValue !== '' ? filteredItems : contItems;
 

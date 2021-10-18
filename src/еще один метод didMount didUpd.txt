@@ -1,0 +1,9 @@
+componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    this.setState({ contacts: contacts ?? this.state.contacts });
+  }
+  componentDidUpdate(props, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
